@@ -1,4 +1,4 @@
-#import "RNIndicator+TSINGOCT.h"
+#import "RNIndicator+Perth.h"
 
 @implementation RNIndicator (Perth)
 
