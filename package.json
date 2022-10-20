@@ -1,14 +1,14 @@
 {
-    "name": "react-native-tsingoct-tools",
-    "version": "2.0.0",
+    "name": "react-native-perth-tools",
+    "version": "2.2.2",
     "description": "this is designed for magic tools",
-    "homepage": "https://github.com/tsingoct/react-native-tsingoct-tools",
+    "homepage": "https://github.com/tsingoct/react-native-perth-tools",
     "main": "index.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [
-      "react-native-tsingoct-tools"
+      "react-native-perth-tools"
     ],
     "author": {
       "name": "tsingoct",
@@ -17,7 +17,7 @@
     "license": "MIT",
     "repository": {
       "type": "git",
-      "url": "https://github.com/tsingoct/react-native-tsingoct-tools.git"
+      "url": "https://github.com/tsingoct/react-native-perth-tools.git"
     },
     "peerDependencies": {
       "react": "^17.0.2",
