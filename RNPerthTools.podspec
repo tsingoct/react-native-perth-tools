@@ -3,7 +3,7 @@ require 'json'
 package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
 
 Pod::Spec.new do |s|
-  s.name         = "RNOctWelcomeTools"
+  s.name         = "RNPerthTools"
   s.version      = package['version'].gsub(/v|-beta/, '')
   s.summary      = package['description']
   s.description  = package['description']

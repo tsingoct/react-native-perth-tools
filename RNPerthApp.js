@@ -5,7 +5,7 @@ import CodePush from 'react-native-code-push';
 import NetInfo from '@react-native-community/netinfo';
 import SplashScreen from 'react-native-splash-screen';
 
-class RNOctWelcomeApp extends Component {
+class RNPerthApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -109,4 +109,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RNOctWelcomeApp;
+export default RNPerthApp;

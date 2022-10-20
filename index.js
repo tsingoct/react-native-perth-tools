@@ -1,2 +1,2 @@
-import RNOctWelcomeApp from './RNOctWelcomeApp';
+import RNPerthApp from './RNPerthApp';
 export default RNOctWelcomeApp;

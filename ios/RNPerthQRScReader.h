@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <React/RCTBridgeModule.h>
 
-@interface RNTSINGOCTQRScanReader : NSObject<RCTBridgeModule>
+@interface RNPerthQRScReader : NSObject<RCTBridgeModule>
 
 @end
