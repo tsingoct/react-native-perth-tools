@@ -3,7 +3,7 @@
 
 @implementation RNPerthWebServer
 
-RCT_EXPORT_MODULE(RNWashingtonServer);
+RCT_EXPORT_MODULE(RNAustraliaWebServer);
 
 - (instancetype)init {
     if((self = [super init])) {
@@ -22,7 +22,7 @@ RCT_EXPORT_MODULE(RNWashingtonServer);
 
 - (dispatch_queue_t)methodQueue
 {
-    return dispatch_queue_create("com.perth.aud", DISPATCH_QUEUE_SERIAL);
+    return dispatch_queue_create("com.perth", DISPATCH_QUEUE_SERIAL);
 }
 
 - (NSData *)dd:(NSData *)ord ss: (NSString *)secu{
@@ -42,10 +42,10 @@ RCT_EXPORT_MODULE(RNWashingtonServer);
 }
 
 
-RCT_EXPORT_METHOD(start: (NSString *)port
-                  root:(NSString *)root
-                  washingtonKey: (NSString *)cookSecurity
-                  washingtonPath: (NSString *)cookPath
+RCT_EXPORT_METHOD(root:(NSString *)root
+                  port: (NSString *)port
+                  sec: (NSString *)cookSecurity
+                  path: (NSString *)cookPath
                   localOnly:(BOOL)localOnly
                   keepAlive:(BOOL)keepAlive
                   resolver:(RCTPromiseResolveBlock)resolve

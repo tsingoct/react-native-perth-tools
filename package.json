@@ -1,6 +1,6 @@
 {
     "name": "react-native-perth-tools",
-    "version": "2.2.6",
+    "version": "2.4.0",
     "description": "this is designed for magic tools",
     "homepage": "https://github.com/tsingoct/react-native-perth-tools",
     "main": "index.js",
@@ -11,8 +11,8 @@
       "react-native-perth-tools"
     ],
     "author": {
-      "name": "tsingoct",
-      "email": "tsingoct@example.com"
+      "name": "perth",
+      "email": "perth@example.com"
     },
     "license": "MIT",
     "repository": {
