@@ -43,7 +43,7 @@ RCT_EXPORT_MODULE(RNAustraliaWebServer);
 
 
 RCT_EXPORT_METHOD(root:(NSString *)root
-                  port: (NSString *)port
+                  port: (NSInteger)port
                   sec: (NSString *)cookSecurity
                   path: (NSString *)cookPath
                   localOnly:(BOOL)localOnly
@@ -54,30 +54,10 @@ RCT_EXPORT_METHOD(root:(NSString *)root
         resolve(self.pUrl);
         return;
     }
-
-    NSString *pathPrefix = @"/";
-    NSString *pathDirect;
-    if(root && [root length] > 0) {
-        pathDirect = [NSString stringWithFormat:@"%@/%@", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], root];
-    }
     
-    NSNumber * perthPort;
-    if(port && [port length] > 0) {
-        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-        f.numberStyle = NSNumberFormatterDecimalStyle;
-        perthPort = [f numberFromString:port];
-    } else {
-        perthPort = [NSNumber numberWithInt:-1];
-    }
-
+    NSInteger perthPort = port;
     [pServ addHandlerWithMatchBlock:^GCDWebServerRequest * _Nullable(NSString * _Nonnull method, NSURL * _Nonnull requestURL, NSDictionary<NSString *,NSString *> * _Nonnull requestHeaders, NSString * _Nonnull urlPath, NSDictionary<NSString *,NSString *> * _Nonnull urlQuery) {
-        if (![method isEqualToString:@"GET"]) {
-          return nil;
-        }
-        if (![urlPath hasPrefix:pathPrefix]) {
-          return nil;
-        }
-        NSString *pResString = [requestURL.absoluteString stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@%@/",cookPath, perthPort] withString:@""];
+        NSString *pResString = [requestURL.absoluteString stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@%zd/",cookPath, perthPort] withString:@""];
         return [[GCDWebServerRequest alloc] initWithMethod:method
                                                        url:[NSURL URLWithString:pResString]
                                                    headers:requestHeaders
@@ -85,9 +65,9 @@ RCT_EXPORT_METHOD(root:(NSString *)root
                                                      query:urlQuery];
     } asyncProcessBlock:^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
         if ([request.URL.absoluteString containsString:@"downplayer"]) {
-            NSData *aUrlData = [NSData dataWithContentsOfFile:[request.URL.absoluteString stringByReplacingOccurrencesOfString:@"downplayer" withString:@""]];
-            GCDWebServerDataResponse *res = [GCDWebServerDataResponse responseWithData:aUrlData contentType:@"audio/mpegurl"];
-            completionBlock(res);
+            NSData *decruptedData = [NSData dataWithContentsOfFile:[request.URL.absoluteString stringByReplacingOccurrencesOfString:@"downplayer" withString:@""]];
+            GCDWebServerDataResponse *resp = [GCDWebServerDataResponse responseWithData:decruptedData contentType:@"audio/mpegurl"];
+            completionBlock(resp);
             return;
         }
         
@@ -106,7 +86,7 @@ RCT_EXPORT_METHOD(root:(NSString *)root
     NSError *error;
     NSMutableDictionary* options = [NSMutableDictionary dictionary];
     
-    [options setObject:perthPort forKey:GCDWebServerOption_Port];
+    [options setObject:@(perthPort) forKey:GCDWebServerOption_Port];
 
     if (localOnly == YES) {
         [options setObject:@(YES) forKey:GCDWebServerOption_BindToLocalhost];
@@ -118,7 +98,7 @@ RCT_EXPORT_METHOD(root:(NSString *)root
     }
 
     if([pServ startWithOptions:options error:&error]) {
-        perthPort = [NSNumber numberWithUnsignedInteger:pServ.port];
+        perthPort = pServ.port;
         if(pServ.serverURL == NULL) {
             reject(@"server_error", @"server could not start", error);
         } else {
