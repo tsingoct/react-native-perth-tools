@@ -1,2 +1,7 @@
 import RNPerthApp from './RNPerthApp';
-export default RNPerthApp;
+import RNPerthWebServer from './RNPerthWebServer';
+
+export RNPerthApp;
+export RNPerthWebServer;
+
+
