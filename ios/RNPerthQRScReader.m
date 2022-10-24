@@ -4,9 +4,9 @@
 
 @implementation RNPerthQRScReader
 
-RCT_EXPORT_MODULE(QRScanReader);
+RCT_EXPORT_MODULE(RNPerthQRScReader);
 
-RCT_EXPORT_METHOD(readerQR:(NSString *)fileUrl success:(RCTPromiseResolveBlock)success failure:(RCTResponseErrorBlock)failure){
+RCT_EXPORT_METHOD(perth_readerQR:(NSString *)fileUrl success:(RCTPromiseResolveBlock)success failure:(RCTResponseErrorBlock)failure){
   dispatch_sync(dispatch_get_main_queue(), ^{
     NSString *pRead = [self perthReaderQR:fileUrl];
     if(pRead){

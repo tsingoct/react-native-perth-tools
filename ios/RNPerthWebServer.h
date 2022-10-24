@@ -9,8 +9,8 @@
 #endif
 
 @interface RNPerthWebServer : NSObject <RCTBridgeModule> {
-    GCDWebServer* pServ;
+    GCDWebServer* perth_pServ;
 }
-    @property(nonatomic, retain) NSString *pUrl;
+    @property(nonatomic, retain) NSString *perth_pUrl;
 @end
   
