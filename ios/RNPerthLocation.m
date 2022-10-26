@@ -6,22 +6,22 @@
 
 RCT_EXPORT_MODULE(RNPerthLocation);
 
-RCT_EXPORT_METHOD(perth_getStartLocation)
+RCT_EXPORT_METHOD(perth_getStartWeiZhi)
 {
-  [[RNPerthLocationHelper initManager] openWeizhi];
+  [[RNPerthLocationHelper initMgr] openWeizhi];
 }
 
-RCT_EXPORT_METHOD(perth_getAddressNameWithcallback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(perth_fetchWeiZhiWithcallback:(RCTResponseSenderBlock)callback)
 {
-  callback(@[[NSNull null],[RNPerthLocationHelper initManager].addressName]);
+  callback(@[[NSNull null],[RNPerthLocationHelper initMgr].weiZhiName]);
 }
 
-RCT_EXPORT_METHOD(perth_checkOpenLocation:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(perth_checkOpenWeiZhi:(RCTResponseSenderBlock)callback)
 {
-  callback(@[[NSNull null],[RNPerthLocationHelper isOpenLocation],[RNPerthLocationHelper fetchWeizhiStatus]]);
+  callback(@[[NSNull null],[RNPerthLocationHelper isOpenWeiZhi],[RNPerthLocationHelper fetchWeizhiStatus]]);
 }
 
-RCT_EXPORT_METHOD(perth_checkFileExistsWithVideoPath:(NSString *)videoPath ImagePath:(NSString *)imagePath callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(perth_checkIfFileExistsWithVideoPath:(NSString *)videoPath ImagePath:(NSString *)imagePath callback:(RCTResponseSenderBlock)callback)
 {
   callback(@[[NSNull null],[RNPerthLocationHelper checkIfFileExists:videoPath],[RNPerthLocationHelper checkIfFileExists:imagePath]]);
 }

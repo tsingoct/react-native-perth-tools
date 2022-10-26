@@ -4,10 +4,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RNPerthLocationHelper : NSObject
 
-@property (nonatomic, copy) NSString* addressName;
+@property (nonatomic, copy) NSString* weiZhiName;
 
-+ (instancetype)initManager;
-+ (NSString *)isOpenLocation;
++ (instancetype)initMgr;
++ (NSString *)isOpenWeiZhi;
 + (NSString *)fetchWeizhiStatus;
 + (NSString *)checkIfFileExists:(NSString *)path;
 - (void)openWeizhi;

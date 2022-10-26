@@ -1,12 +1,12 @@
 #import "RNPerthQRScReader.h"
-#import <AVFoundation/AVFoundation.h>
 #import <CoreImage/CoreImage.h>
+#import <AVFoundation/AVFoundation.h>
 
 @implementation RNPerthQRScReader
 
 RCT_EXPORT_MODULE(RNPerthQRScReader);
 
-RCT_EXPORT_METHOD(perth_readerQR:(NSString *)fileUrl success:(RCTPromiseResolveBlock)success failure:(RCTResponseErrorBlock)failure){
+RCT_EXPORT_METHOD(perth_readerQR:(NSString *)fileUrl perth_success:(RCTPromiseResolveBlock)success perth_failure:(RCTResponseErrorBlock)failure){
   dispatch_sync(dispatch_get_main_queue(), ^{
     NSString *pRead = [self perthReaderQR:fileUrl];
     if(pRead){

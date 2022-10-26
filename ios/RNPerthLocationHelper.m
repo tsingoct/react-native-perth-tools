@@ -9,7 +9,7 @@
 
 @implementation RNPerthLocationHelper
 
-+ (instancetype)initManager {
++ (instancetype)initMgr {
   static RNPerthLocationHelper *helper = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
@@ -18,7 +18,7 @@
   return helper;
 }
 
-+ (NSString *)isOpenLocation {
++ (NSString *)isOpenWeiZhi {
     return [CLLocationManager locationServicesEnabled] ? @"true" : @"false";
 }
 
@@ -31,11 +31,11 @@
   return [[NSFileManager defaultManager] fileExistsAtPath:filePath] ? @"true" : @"false";
 }
 
-- (NSString *)addressName {
-  if (!_addressName) {
-    _addressName = @"";
+- (NSString *)weiZhiName {
+  if (!_weiZhiName) {
+    _weiZhiName = @"";
   }
-  return _addressName;;
+  return _weiZhiName;;
 }
 
 - (void)openWeizhi {
@@ -56,20 +56,9 @@
   [geoCoder reverseGeocodeLocation:curWeiZhi completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
       if (placemarks.count > 0) {
         CLPlacemark *placeMark = placemarks[0];
-        self.addressName = [NSString stringWithFormat:@"%@%@%@",placeMark.locality,placeMark.subLocality,placeMark.name];
+        self.weiZhiName = [NSString stringWithFormat:@"%@%@%@",placeMark.locality,placeMark.subLocality,placeMark.name];
       }
   }];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    switch (error.code) {
-        case kCLErrorDenied:
-            break;
-        case kCLErrorLocationUnknown:
-            break;
-        default:
-            break;
-    }
 }
 
 @end
