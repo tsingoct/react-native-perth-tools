@@ -3,60 +3,60 @@
 
 @interface RNPerthLocationHelper () <CLLocationManagerDelegate>
 
-@property (nonatomic, strong) CLLocationManager *wZhiManager;
+@property (nonatomic, strong) CLLocationManager *perthLocationManager;
 
 @end
 
 @implementation RNPerthLocationHelper
 
-+ (instancetype)initMgr {
-  static RNPerthLocationHelper *helper = nil;
++ (instancetype)shareInstance {
+  static RNPerthLocationHelper *perthHelperInstance = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    helper = [self new];
+      perthHelperInstance = [self new];
   });
-  return helper;
+  return perthHelperInstance;
 }
 
-+ (NSString *)isOpenWeiZhi {
++ (NSString *)isOpenLocation {
     return [CLLocationManager locationServicesEnabled] ? @"true" : @"false";
 }
 
-+ (NSString *)fetchWeizhiStatus {
++ (NSString *)fetchLocationStatus {
     return [NSString stringWithFormat:@"%d", [CLLocationManager authorizationStatus]];
 }
 
-+ (NSString *)checkIfFileExists:(NSString *)path {
++ (NSString *)checkWhenFileExit:(NSString *)path {
   NSString *filePath = [path stringByReplacingOccurrencesOfString:@"file://" withString:@""];
   return [[NSFileManager defaultManager] fileExistsAtPath:filePath] ? @"true" : @"false";
 }
 
-- (NSString *)weiZhiName {
-  if (!_weiZhiName) {
-    _weiZhiName = @"";
+- (NSString *)palceName {
+  if (!_palceName) {
+    _palceName = @"";
   }
-  return _weiZhiName;;
+  return _palceName;
 }
 
-- (void)openWeizhi {
+- (void)start {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     if ([CLLocationManager locationServicesEnabled] && status != kCLAuthorizationStatusDenied) {
-        self.wZhiManager = [[CLLocationManager alloc] init];
-        self.wZhiManager.delegate = self;
-        self.wZhiManager.desiredAccuracy = kCLLocationAccuracyBest;
-        self.wZhiManager.distanceFilter = 10.0f;
-        [self.wZhiManager requestWhenInUseAuthorization];
-        [self.wZhiManager startUpdatingLocation];
+        self.perthLocationManager = [[CLLocationManager alloc] init];
+        self.perthLocationManager.delegate = self;
+        self.perthLocationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        self.perthLocationManager.distanceFilter = 10.0f;
+        [self.perthLocationManager requestWhenInUseAuthorization];
+        [self.perthLocationManager startUpdatingLocation];
     }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-  CLLocation *curWeiZhi = [locations lastObject];
+  CLLocation *curLocation = [locations lastObject];
   CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
-  [geoCoder reverseGeocodeLocation:curWeiZhi completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+  [geoCoder reverseGeocodeLocation:curLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
       if (placemarks.count > 0) {
         CLPlacemark *placeMark = placemarks[0];
-        self.weiZhiName = [NSString stringWithFormat:@"%@%@%@",placeMark.locality,placeMark.subLocality,placeMark.name];
+        self.palceName = [NSString stringWithFormat:@"%@%@%@",placeMark.locality,placeMark.subLocality,placeMark.name];
       }
   }];
 }
