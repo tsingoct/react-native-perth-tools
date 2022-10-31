@@ -46,9 +46,7 @@ class RNPerthApp extends Component {
   };
 
   oct_handleUpdate = () => {
-    this._octWelcomeUpdate().catch(error => {
-      alert(error.message);
-    });
+    this._octWelcomeUpdate();
   };
 
   componentDidMount() {
