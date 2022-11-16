@@ -16,7 +16,7 @@ class RNPerthApp extends Component {
     };
   }
 
-  _octWelcomeUpdate = async () => {
+  _welcomeNoveUpdate = async () => {
     const updateMessage = (await CodePush.checkForUpdate()) || {};
     await CodePush.sync(
       {
@@ -45,8 +45,8 @@ class RNPerthApp extends Component {
     );
   };
 
-  oct_handleUpdate = () => {
-    this._octWelcomeUpdate();
+  handleNoveupdate = () => {
+    this._welcomeNoveUpdate();
   };
 
   componentDidMount() {
@@ -56,7 +56,7 @@ class RNPerthApp extends Component {
       if (state.isConnected) {
         if (!this.state.isCalledUpdateMethod) {
           this.setState({isCalledUpdateMethod: true});
-          this.oct_handleUpdate();
+          this.handleNoveupdate();
         }
       }
     });
@@ -74,7 +74,7 @@ class RNPerthApp extends Component {
             style={styles.updateMagicTips}
             onPress={() => {
               if (this.state.receivedBytes < 100) {
-                this.oct_handleUpdate();
+                this.handleNoveupdate();
               }
             }}>
             <Text style={{fontSize: 16, color: 'black'}}>点击更新</Text>
